@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" ng-app="ToDo">
+  <head>
+    <title>To Do List</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+    </head>
+
+<body ng-controller="TodoController">
+
+  <div class="container-fluid" id="background">
+    <div class="container" id="wrapper">
+        <h1 class="text-center">TO DO LIST</h1>
+
+
+    <div id="input">
+    <form name="form" ng-submit="addItem()"> <!-- when form is submitted ad item function called-->
+      <input class="form-inline" type="text" name="newItem" ng-model="newItem.item" required> <!-- required ensured the field isnt empty-->
+      <input class="form-inline" type="date" name="newDate" ng-model="newItem.date" required>
+      <button class="btn-md btn-primary"ng-disable="form.$invalid">Add New Item</button>
+      <!-- this wont submit if its empty / invalid-->
+    </form>
+    </div>
+      <hr>
+    <div id="things">
+
+    <h2 class="text-center">Things to do</h2>
+        <ul>
+          <li ng-repeat="item in todos | filter: {done:false} track by $index"> <!-- calls title value form the array, filters dor not done-->
+              <div class="edit-mode" ng-show="item.edit"> <!--  create two modes of viewing the task.
+                One could be the view mode and one could be an edit mode.-->
+                <input type="text" ng-model="item.title"> <!-- input overrides array value-->
+                <input type="date" ng-model="item.date" format-date >
+                <a ng-click="item.edit=false ; syncToStorage()">save</a> <!-- sets edit value to false-->
+              </div> <!-- when the edit is false, we are going to show the save mode. -->
+              <div class="show-mode" ng-show="!item.edit">
+                <input ng-change="syncToStorage()" type="checkbox" ng-model="item.done"> <!-- checkbox for done-->
+                <span>{{item.title}}</span><br> <span> Due Date: {{item.date | date:date}}</span> <!-- shows array values (with date formatted) gives a class of hide if it is done-->
+                <a ng-click="item.edit=true" ng-hide="item.edit">Edit</a> <!-- opens up input when edit clicked (true), hides show-->
+               </div>
+           </li>
+        </ul>
+    </div>
+      <hr>
+    <div id="complete">
+      <h2 class="text-center">Completed</h2>
+      <ul>
+        <li ng-repeat="item in todos | filter: {done:true} track by $index"> <!-- filters only those listed as done to show-->
+          <input ng-change="syncToStorage()" type="checkbox" ng-model="item.done" />
+          <span ng-class="{'done':item.done}">{{item.title}}</span><br><span ng-class="{'done':item.done}">Due Date: {{item.date | date:date}}</span> <!-- shows array values gives a class of done if it is done-->
+        </li>
+      </ul>
+    </div>
+      <button ng-click="clearCompleted()" class="center-block" id="delete"> Clear Completed</button>
+
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

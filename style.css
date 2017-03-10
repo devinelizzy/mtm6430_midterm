@@ -1,0 +1,63 @@
+ul{
+  list-style: none;
+}
+.done{
+  text-decoration: line-through;
+}
+h1{
+  color:Purple;
+  font-family: 'Rock Salt', cursive;
+  font-weight: bold;
+
+}
+h2{
+  color:Purple;
+  font-family: 'Rock Salt', cursive;
+}
+hr {
+    height: 2px;
+    background-color:#555;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+}
+
+#input{
+  text-align: center;
+  font-size: 18px;
+}
+#things{
+min-height:100px;
+
+}
+
+#complete{
+min-height:100px;
+
+}
+
+input{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+#wrapper{
+  border-style: solid;
+  border-radius: 15px;
+   margin-top:20px;
+    background-color: white;
+
+}
+#delete{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+#background{
+    background:linear-gradient(to right, purple, blue);
+   height:100vh;
+    width:100%;
+}
+
+span{
+  font-size: 18px;
+}
